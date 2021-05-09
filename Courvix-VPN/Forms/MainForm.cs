@@ -168,8 +168,7 @@ namespace Courvix_VPN
             }
             if (!File.Exists(Strings.OpenVPNExe))
             {
-                var client = new HttpClient();
-                var zip = await client.GetByteArrayAsync("https://cdn.discordapp.com/attachments/827817935388803093/827918131896778782/openvpnfiles.zip");
+                var zip = await _client.GetByteArrayAsync("https://cdn.discordapp.com/attachments/827817935388803093/827918131896778782/openvpnfiles.zip");
                 statuslbl.Text = "Extracting OpenVPN Binaries";
                 var path = Path.GetTempFileName();
                 File.WriteAllBytes(path, zip);
