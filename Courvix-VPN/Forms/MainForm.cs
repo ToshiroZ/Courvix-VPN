@@ -59,7 +59,7 @@ namespace Courvix_VPN
 
                 File.WriteAllText(configPath, await _client.GetStringAsync(server.ConfigLink));
                 statuslbl.Text = "Status: Connecting";
-                openvpn = new OpenVPN(configPath, openVpnExeFileName: Strings.OpenVPNExe, "jj");
+                openvpn = new OpenVPN(configPath, openVpnExeFileName: Strings.OpenVPNExe, Strings.OpenVPNLogs);
                 openvpn.Closed += Manager_Closed;
                 openvpn.Connected += Manager_Connected;
                 openvpn.ConnectionErrored += Manager_ConnectionErrored;
