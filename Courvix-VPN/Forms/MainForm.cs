@@ -54,6 +54,7 @@ namespace Courvix_VPN
                 await GetOpenVPN();
                 statuslbl.Text = "Status: Downloading Config";
 
+
                 configPath = Path.GetTempFileName();
 
                 File.WriteAllText(configPath, await _client.GetStringAsync(server.ConfigLink));
