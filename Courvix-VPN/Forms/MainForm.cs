@@ -14,23 +14,25 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Windows.Forms;
 using System.IO.Compression;
+using System.Net;
 using System.Threading.Tasks;
+using System.Windows.Forms.VisualStyles;
 
 namespace Courvix_VPN
 {
     public partial class MainForm : Form
     {
-        private static readonly HttpClient _client = new HttpClient();
-        private static List<Server> Servers;
-        private static OpenVPN openvpn;
-        private static string connectedServer;
-        private static string configPath;
+        private static readonly HttpClient Client = new HttpClient();
+        private static List<Server> _servers;
+        private static OpenVPN _openvpn;
+        private static string _connectedServer;
         public MainForm()
         {
             InitializeComponent();
@@ -41,38 +43,56 @@ namespace Courvix_VPN
         {
             if(ConnectBTN.Text == "Disconnect")
             {
-                await Task.Run(() => openvpn.Dispose());
-                openvpn = null;
+                await Task.Run(() => _openvpn.Dispose());
+                _openvpn = null;
             }
             else
             {
-                var server = Servers.First(x => x.ServerName == serversCB.Text);
-                connectedServer = server.ServerName;
+                var server = _servers.First(x => x.ServerName == serversCB.Text);
+                _connectedServer = server.ServerName;
                 ConnectBTN.Enabled = false;
                 ConnectBTN.Text = "Connecting...";
-                ConnectBTN.ShadowDecoration.Color = Color.Gray;
-                await GetOpenVPN();
-                statuslbl.Text = "Status: Downloading Config";
-
-
-                configPath = Path.GetTempFileName();
-
-                File.WriteAllText(configPath, await _client.GetStringAsync(server.ConfigLink));
+                ConnectBTN.ShadowDecoration.Color = Color.Gray; 
+                
+                await GetConfig(server);
                 statuslbl.Text = "Status: Connecting";
-                openvpn = new OpenVPN(configPath, openVpnExeFileName: Strings.OpenVPNExe, Strings.OpenVPNLogs);
-                openvpn.Closed += Manager_Closed;
-                openvpn.Connected += Manager_Connected;
-                openvpn.ConnectionErrored += Manager_ConnectionErrored;
+                _openvpn = new OpenVPN(Path.Combine(Strings.ConfigDirectory, server.ServerName), logPath: Strings.OpenVPNLogs);
+                _openvpn.Closed += Manager_Closed;
+                _openvpn.Connected += Manager_Connected;
+                _openvpn.ConnectionErrored += Manager_ConnectionErrored;
+                _openvpn.Output += Manager_Output;
             }
         }
 
+        private void Manager_Output(object sender, string output)
+        {
+            File.AppendAllText(Strings.OpenVPNLogs, output);
+        }
+
+        private async Task GetConfig(Server server)
+        {
+            if (!Directory.Exists(Strings.ConfigDirectory))
+                Directory.CreateDirectory(Strings.ConfigDirectory);
+            if (!File.Exists(Path.Combine(Strings.ConfigDirectory, server.ServerName)))
+            {
+                statuslbl.Text = "Status: Downloading Config";
+                var resp = await Client.GetAsync(server.ConfigLink);
+                if ((int) resp.StatusCode == 429)
+                {
+                    MessageBox.Show("Failed to download config. You most likely have been ratelimited by flux");
+                    Application.Exit();
+                }
+                File.WriteAllText(Path.Combine(Strings.ConfigDirectory, server.ServerName), await resp.Content.ReadAsStringAsync());
+            }
+        }
         private async void MainForm_Load(object sender, EventArgs e)
         {
+            CheckOpenVPN();
             try
             {
-                var serverjson = await _client.GetStringAsync("https://courvix.com/vpn/server_list.json");
-                Servers = JsonConvert.DeserializeObject<List<Server>>(serverjson).OrderBy(x => x.ServerName).ToList();
-                serversCB.DataSource = Servers.Select(x => x.ServerName).ToArray();
+                var serverjson = await Client.GetStringAsync("https://courvix.com/vpn/server_list.json");
+                _servers = JsonConvert.DeserializeObject<List<Server>>(serverjson).OrderBy(x => x.ServerName).ToList();
+                serversCB.DataSource = _servers.Select(x => x.ServerName).ToArray();
             }
             catch
             {
@@ -115,15 +135,15 @@ namespace Courvix_VPN
         }
         private void Manager_ConnectionErrored(object sender, string output)
         {
-            openvpn.Dispose();
-            openvpn = null;
+            _openvpn.Dispose();
+            _openvpn = null;
             base.Invoke((MethodInvoker)delegate
             {
                 ConnectBTN.Enabled = true;
                 ConnectBTN.Text = "Connect";
                 statuslbl.Text = "Status: Not Connected";
+                CustomMessageBox.Show("Courvix VPN", output);
             });
-            CustomMessageBox.Show("Courvix VPN", output);
 
             Globals.RichPresence.State = $"Disconnected";
             Globals.SetRPC();
@@ -138,42 +158,34 @@ namespace Courvix_VPN
                 ConnectBTN.Text = "Connect";
                 statuslbl.Text = "Status: Not Connected";
                 ConnectBTN.Enabled = true;
+                CustomMessageBox.Show("Courvix VPN", "You have been disconnected from OpenVPN");
             });
-            CustomMessageBox.Show("Courvix VPN", "You have been disconnected from OpenVPN");
         }
 
         private void Manager_Connected(object sender)
         {
-            Globals.RichPresence.State = $"Connected to {connectedServer}";
+            Globals.RichPresence.State = $"Connected to {_connectedServer}";
             Globals.SetRPC();
             base.Invoke((MethodInvoker)delegate
             {
                 ConnectBTN.Text = "Disconnect";
                 ConnectBTN.Enabled = true;
                 statuslbl.Text = "Status: Connected";
+                CustomMessageBox.Show("Courvix VPN", $"Successfully Connected To {_connectedServer}");
             });
-            File.Delete(configPath);
-            CustomMessageBox.Show("Courvix VPN", $"Successfully Connected To {connectedServer}");
         }
-        private async Task GetOpenVPN()
+
+        private void CheckOpenVPN()
         {
-            if (!Directory.Exists(Strings.Data))
+            var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "OpenVPN", "bin",
+                "openvpn.exe");
+            if (!File.Exists(path))
             {
-                statuslbl.Text = "Getting OpenVPN Binaries";
-                Directory.CreateDirectory(Strings.Data);
-            }
-            if (!Directory.Exists(Strings.OpenVPNDirectory))
-            {
-                Directory.CreateDirectory(Strings.OpenVPNDirectory);
-            }
-            if (!File.Exists(Strings.OpenVPNExe))
-            {
-                var zip = await _client.GetByteArrayAsync("https://cdn.discordapp.com/attachments/827817935388803093/827918131896778782/openvpnfiles.zip");
-                statuslbl.Text = "Extracting OpenVPN Binaries";
-                var path = Path.GetTempFileName();
-                File.WriteAllBytes(path, zip);
-                ZipFile.ExtractToDirectory(path, Strings.OpenVPNDirectory);
-                File.Delete(path);
+                CustomMessageBox.Show("Courvix VPN", "You need to download OpenVPN to use this client");
+                CustomMessageBox.Show("Courvix VPN",
+                    "When you close this message box the browser will open with the download link to openvpn");
+                Process.Start("https://swupdate.openvpn.org/community/releases/OpenVPN-2.5.2-I601-amd64.msi");
+                Environment.Exit(1);
             }
         }
     }

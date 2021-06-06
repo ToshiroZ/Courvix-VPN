@@ -48,7 +48,7 @@ namespace Courvix_VPN
             // headerlbl
             // 
             this.headerlbl.BackColor = System.Drawing.Color.Transparent;
-            this.headerlbl.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.headerlbl.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.headerlbl.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.headerlbl.IsSelectionEnabled = false;
             this.headerlbl.Location = new System.Drawing.Point(121, 17);
@@ -59,7 +59,7 @@ namespace Courvix_VPN
             // 
             // headerbar
             // 
-            this.headerbar.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(99)))), ((int)(((byte)(204)))));
+            this.headerbar.FillColor = System.Drawing.Color.FromArgb(((int) (((byte) (0)))), ((int) (((byte) (99)))), ((int) (((byte) (204)))));
             this.headerbar.FillThickness = 2;
             this.headerbar.Location = new System.Drawing.Point(12, 61);
             this.headerbar.Name = "headerbar";
@@ -69,7 +69,7 @@ namespace Courvix_VPN
             // statuslbl
             // 
             this.statuslbl.BackColor = System.Drawing.Color.Transparent;
-            this.statuslbl.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statuslbl.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.statuslbl.ForeColor = System.Drawing.Color.White;
             this.statuslbl.IsSelectionEnabled = false;
             this.statuslbl.Location = new System.Drawing.Point(3, 415);
@@ -82,28 +82,23 @@ namespace Courvix_VPN
             // 
             this.serversCB.Animated = true;
             this.serversCB.BackColor = System.Drawing.Color.Transparent;
-            this.serversCB.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(11)))), ((int)(((byte)(17)))));
+            this.serversCB.BorderColor = System.Drawing.Color.FromArgb(((int) (((byte) (10)))), ((int) (((byte) (11)))), ((int) (((byte) (17)))));
             this.serversCB.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.serversCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.serversCB.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(14)))), ((int)(((byte)(21)))));
-            this.serversCB.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(11)))), ((int)(((byte)(50)))));
-            this.serversCB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(11)))), ((int)(((byte)(50)))));
+            this.serversCB.FillColor = System.Drawing.Color.FromArgb(((int) (((byte) (12)))), ((int) (((byte) (14)))), ((int) (((byte) (21)))));
+            this.serversCB.FocusedColor = System.Drawing.Color.FromArgb(((int) (((byte) (10)))), ((int) (((byte) (11)))), ((int) (((byte) (50)))));
+            this.serversCB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int) (((byte) (10)))), ((int) (((byte) (11)))), ((int) (((byte) (50)))));
             this.serversCB.FocusedState.Parent = this.serversCB;
             this.serversCB.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.serversCB.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.serversCB.HoverState.Parent = this.serversCB;
             this.serversCB.ItemHeight = 30;
-            this.serversCB.Items.AddRange(new object[] {
-            "CONNECTION-1",
-            "CONNECTION-2",
-            "CONNECTION-3",
-            "CONNECTION-4",
-            "CONNECTION-5"});
+            this.serversCB.Items.AddRange(new object[] {"CONNECTION-1", "CONNECTION-2", "CONNECTION-3", "CONNECTION-4", "CONNECTION-5"});
             this.serversCB.ItemsAppearance.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.serversCB.ItemsAppearance.Parent = this.serversCB;
             this.serversCB.Location = new System.Drawing.Point(12, 135);
             this.serversCB.Name = "serversCB";
-            this.serversCB.ShadowDecoration.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(99)))), ((int)(((byte)(204)))));
+            this.serversCB.ShadowDecoration.Color = System.Drawing.Color.FromArgb(((int) (((byte) (0)))), ((int) (((byte) (99)))), ((int) (((byte) (204)))));
             this.serversCB.ShadowDecoration.Enabled = true;
             this.serversCB.ShadowDecoration.Parent = this.serversCB;
             this.serversCB.Size = new System.Drawing.Size(340, 36);
@@ -111,8 +106,8 @@ namespace Courvix_VPN
             // 
             // xbtn
             // 
-            this.xbtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.xbtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(14)))), ((int)(((byte)(21)))));
+            this.xbtn.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.xbtn.FillColor = System.Drawing.Color.FromArgb(((int) (((byte) (12)))), ((int) (((byte) (14)))), ((int) (((byte) (21)))));
             this.xbtn.HoverState.Parent = this.xbtn;
             this.xbtn.IconColor = System.Drawing.Color.White;
             this.xbtn.Location = new System.Drawing.Point(319, 1);
@@ -123,7 +118,7 @@ namespace Courvix_VPN
             // 
             // leftborder
             // 
-            this.leftborder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(11)))), ((int)(((byte)(17)))));
+            this.leftborder.BackColor = System.Drawing.Color.FromArgb(((int) (((byte) (10)))), ((int) (((byte) (11)))), ((int) (((byte) (17)))));
             this.leftborder.Dock = System.Windows.Forms.DockStyle.Left;
             this.leftborder.Location = new System.Drawing.Point(0, 0);
             this.leftborder.Name = "leftborder";
@@ -133,7 +128,7 @@ namespace Courvix_VPN
             // 
             // rightborder
             // 
-            this.rightborder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(11)))), ((int)(((byte)(17)))));
+            this.rightborder.BackColor = System.Drawing.Color.FromArgb(((int) (((byte) (10)))), ((int) (((byte) (11)))), ((int) (((byte) (17)))));
             this.rightborder.Dock = System.Windows.Forms.DockStyle.Right;
             this.rightborder.Location = new System.Drawing.Point(361, 0);
             this.rightborder.Name = "rightborder";
@@ -143,7 +138,7 @@ namespace Courvix_VPN
             // 
             // topborder
             // 
-            this.topborder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(11)))), ((int)(((byte)(17)))));
+            this.topborder.BackColor = System.Drawing.Color.FromArgb(((int) (((byte) (10)))), ((int) (((byte) (11)))), ((int) (((byte) (17)))));
             this.topborder.Dock = System.Windows.Forms.DockStyle.Top;
             this.topborder.Location = new System.Drawing.Point(3, 0);
             this.topborder.Name = "topborder";
@@ -153,7 +148,7 @@ namespace Courvix_VPN
             // 
             // bottomborder
             // 
-            this.bottomborder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(11)))), ((int)(((byte)(17)))));
+            this.bottomborder.BackColor = System.Drawing.Color.FromArgb(((int) (((byte) (10)))), ((int) (((byte) (11)))), ((int) (((byte) (17)))));
             this.bottomborder.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.bottomborder.Location = new System.Drawing.Point(3, 432);
             this.bottomborder.Name = "bottomborder";
@@ -165,20 +160,20 @@ namespace Courvix_VPN
             // 
             this.ConnectBTN.Animated = true;
             this.ConnectBTN.BackColor = System.Drawing.Color.Transparent;
-            this.ConnectBTN.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(11)))), ((int)(((byte)(17)))));
+            this.ConnectBTN.BorderColor = System.Drawing.Color.FromArgb(((int) (((byte) (10)))), ((int) (((byte) (11)))), ((int) (((byte) (17)))));
             this.ConnectBTN.BorderRadius = 3;
             this.ConnectBTN.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.ToogleButton;
             this.ConnectBTN.CheckedState.Parent = this.ConnectBTN;
             this.ConnectBTN.Cursor = System.Windows.Forms.Cursors.Hand;
             this.ConnectBTN.CustomImages.Parent = this.ConnectBTN;
-            this.ConnectBTN.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(99)))), ((int)(((byte)(204)))));
-            this.ConnectBTN.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ConnectBTN.FillColor = System.Drawing.Color.FromArgb(((int) (((byte) (0)))), ((int) (((byte) (99)))), ((int) (((byte) (204)))));
+            this.ConnectBTN.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.ConnectBTN.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.ConnectBTN.HoverState.Parent = this.ConnectBTN;
             this.ConnectBTN.Location = new System.Drawing.Point(48, 270);
             this.ConnectBTN.Name = "ConnectBTN";
             this.ConnectBTN.PressedColor = System.Drawing.Color.WhiteSmoke;
-            this.ConnectBTN.ShadowDecoration.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(99)))), ((int)(((byte)(204)))));
+            this.ConnectBTN.ShadowDecoration.Color = System.Drawing.Color.FromArgb(((int) (((byte) (0)))), ((int) (((byte) (99)))), ((int) (((byte) (204)))));
             this.ConnectBTN.ShadowDecoration.Enabled = true;
             this.ConnectBTN.ShadowDecoration.Parent = this.ConnectBTN;
             this.ConnectBTN.Size = new System.Drawing.Size(267, 45);
@@ -190,6 +185,8 @@ namespace Courvix_VPN
             // 
             this.guna2DragControl1.ContainerControl = this;
             this.guna2DragControl1.TargetControl = this.headerlbl;
+            this.guna2DragControl1.TransparentWhileDrag = true;
+            this.guna2DragControl1.UseTransparentDrag = true;
             // 
             // guna2BorderlessForm1
             // 
@@ -198,36 +195,36 @@ namespace Courvix_VPN
             this.guna2BorderlessForm1.BorderRadius = 2;
             this.guna2BorderlessForm1.ContainerControl = this;
             this.guna2BorderlessForm1.ResizeForm = false;
-            this.guna2BorderlessForm1.ShadowColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(99)))), ((int)(((byte)(204)))));
+            this.guna2BorderlessForm1.ShadowColor = System.Drawing.Color.FromArgb(((int) (((byte) (0)))), ((int) (((byte) (99)))), ((int) (((byte) (204)))));
             this.guna2BorderlessForm1.TransparentWhileDrag = true;
             // 
             // RPCCheckbox
             // 
             this.RPCCheckbox.Animated = true;
             this.RPCCheckbox.AutoSize = true;
-            this.RPCCheckbox.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(99)))), ((int)(((byte)(204)))));
+            this.RPCCheckbox.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int) (((byte) (0)))), ((int) (((byte) (99)))), ((int) (((byte) (204)))));
             this.RPCCheckbox.CheckedState.BorderRadius = 2;
             this.RPCCheckbox.CheckedState.BorderThickness = 1;
-            this.RPCCheckbox.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(99)))), ((int)(((byte)(204)))));
+            this.RPCCheckbox.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int) (((byte) (0)))), ((int) (((byte) (99)))), ((int) (((byte) (204)))));
             this.RPCCheckbox.CheckMarkColor = System.Drawing.Color.WhiteSmoke;
-            this.RPCCheckbox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RPCCheckbox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.RPCCheckbox.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.RPCCheckbox.Location = new System.Drawing.Point(203, 413);
             this.RPCCheckbox.Name = "RPCCheckbox";
             this.RPCCheckbox.Size = new System.Drawing.Size(152, 19);
             this.RPCCheckbox.TabIndex = 10;
             this.RPCCheckbox.Text = "Show Status On Discord";
-            this.RPCCheckbox.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.RPCCheckbox.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int) (((byte) (125)))), ((int) (((byte) (137)))), ((int) (((byte) (149)))));
             this.RPCCheckbox.UncheckedState.BorderRadius = 2;
             this.RPCCheckbox.UncheckedState.BorderThickness = 1;
-            this.RPCCheckbox.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(14)))), ((int)(((byte)(21)))));
+            this.RPCCheckbox.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int) (((byte) (12)))), ((int) (((byte) (14)))), ((int) (((byte) (21)))));
             this.RPCCheckbox.CheckedChanged += new System.EventHandler(this.RPCCheckbox_CheckedChanged);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(14)))), ((int)(((byte)(21)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int) (((byte) (12)))), ((int) (((byte) (14)))), ((int) (((byte) (21)))));
             this.ClientSize = new System.Drawing.Size(364, 435);
             this.Controls.Add(this.RPCCheckbox);
             this.Controls.Add(this.ConnectBTN);
@@ -246,7 +243,6 @@ namespace Courvix_VPN
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion
