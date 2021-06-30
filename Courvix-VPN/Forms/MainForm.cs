@@ -22,6 +22,7 @@ using System.Net.Http;
 using System.Windows.Forms;
 using System.IO.Compression;
 using System.Net;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms.VisualStyles;
 
@@ -33,15 +34,16 @@ namespace Courvix_VPN
         private static List<Server> _servers;
         private static OpenVPN _openvpn;
         private static string _connectedServer;
+
         public MainForm()
         {
             InitializeComponent();
-            statuslbl.Text = "Status: Not Connected";
+
         }
 
         private async void ConnectBTN_Click(object sender, EventArgs e)
         {
-            if(ConnectBTN.Text == "Disconnect")
+            if (ConnectBTN.Text == "Disconnect")
             {
                 await Task.Run(() => _openvpn.Dispose());
                 _openvpn = null;
@@ -52,11 +54,12 @@ namespace Courvix_VPN
                 _connectedServer = server.ServerName;
                 ConnectBTN.Enabled = false;
                 ConnectBTN.Text = "Connecting...";
-                ConnectBTN.ShadowDecoration.Color = Color.Gray; 
-                
+                ConnectBTN.ShadowDecoration.Color = Color.Gray;
+
                 await GetConfig(server);
                 statuslbl.Text = "Status: Connecting";
-                _openvpn = new OpenVPN(Path.Combine(Strings.ConfigDirectory, server.ServerName), logPath: Strings.OpenVPNLogs);
+                _openvpn = new OpenVPN(Path.Combine(Strings.ConfigDirectory, server.ServerName),
+                    logPath: Strings.OpenVPNLogs);
                 _openvpn.Closed += Manager_Closed;
                 _openvpn.Connected += Manager_Connected;
                 _openvpn.ConnectionErrored += Manager_ConnectionErrored;
@@ -82,14 +85,22 @@ namespace Courvix_VPN
                     MessageBox.Show("Failed to download server configuration");
                     Application.Exit();
                 }
-                File.WriteAllText(Path.Combine(Strings.ConfigDirectory, server.ServerName), await resp.Content.ReadAsStringAsync());
+
+                File.WriteAllText(Path.Combine(Strings.ConfigDirectory, server.ServerName),
+                    await resp.Content.ReadAsStringAsync());
             }
         }
+
         private async void MainForm_Load(object sender, EventArgs e)
         {
-            CheckOpenVPN();
+            
             try
             {
+                statuslbl.Text = "Status: Checking For Updates";
+                await CheckVersion();
+                statuslbl.Text = "Status: Checking For OpenVPN";
+                CheckOpenVPN();
+                statuslbl.Text = "Status: Getting Servers";
                 var serverjson = await Client.GetStringAsync("https://courvix.com/vpn/server_list.json");
                 _servers = JsonConvert.DeserializeObject<List<Server>>(serverjson).OrderBy(x => x.ServerName).ToList();
                 serversCB.DataSource = _servers.Select(x => x.ServerName).ToArray();
@@ -99,11 +110,33 @@ namespace Courvix_VPN
                 MessageBox.Show("Failed to retrieve servers from Courvix Network");
                 Application.Exit();
             }
+
             var settings = SettingsManager.Load();
             RPCCheckbox.Checked = settings.DiscordRPC;
+            statuslbl.Text = "Status: Not Connected";
         }
 
-        private void RPCCheckbox_CheckedChanged(object sender, EventArgs e)
+        private async Task CheckVersion()
+        {
+            var clientjson = await Client.GetStringAsync("https://courvix.com/vpn/client_version.json");
+            var clientversion = JsonConvert.DeserializeObject<ClientVersion>(clientjson);
+            if (clientversion?.Version > Assembly.GetExecutingAssembly().GetName().Version)
+            {
+                if (MessageBox.Show("Update Found\nDo you want to download it", "Courvix VPN",
+                    MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    statuslbl.Text = "Status: Downloading Update";
+                    var bytes = await Client.GetByteArrayAsync(clientversion.DownloadLink);
+                    var fileName = Environment.GetCommandLineArgs().First();
+                    File.Move(fileName, Path.Combine(Path.GetTempPath(), Path.GetFileName(fileName)));
+                    File.WriteAllBytes(fileName, bytes);
+                    Process.Start(fileName);
+                    Environment.Exit(0);
+                }
+            }
+        }
+
+    private void RPCCheckbox_CheckedChanged(object sender, EventArgs e)
         {
             var settings = SettingsManager.Load();
             settings.DiscordRPC = RPCCheckbox.Checked;
