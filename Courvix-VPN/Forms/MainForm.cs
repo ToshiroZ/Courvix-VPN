@@ -79,7 +79,7 @@ namespace Courvix_VPN
                 var resp = await Client.GetAsync(server.ConfigLink);
                 if ((int) resp.StatusCode == 429)
                 {
-                    MessageBox.Show("Failed to download config. You most likely have been ratelimited by flux");
+                    MessageBox.Show("Failed to download server configuration");
                     Application.Exit();
                 }
                 File.WriteAllText(Path.Combine(Strings.ConfigDirectory, server.ServerName), await resp.Content.ReadAsStringAsync());
@@ -96,7 +96,7 @@ namespace Courvix_VPN
             }
             catch
             {
-                MessageBox.Show("Failed to retrieve servers. You most likely have been ratelimited by flux");
+                MessageBox.Show("Failed to retrieve servers from Courvix Network");
                 Application.Exit();
             }
             var settings = SettingsManager.Load();
@@ -158,7 +158,6 @@ namespace Courvix_VPN
                 ConnectBTN.Text = "Connect";
                 statuslbl.Text = "Status: Not Connected";
                 ConnectBTN.Enabled = true;
-                CustomMessageBox.Show("Courvix VPN", "You have been disconnected from OpenVPN");
             });
         }
 
@@ -171,7 +170,6 @@ namespace Courvix_VPN
                 ConnectBTN.Text = "Disconnect";
                 ConnectBTN.Enabled = true;
                 statuslbl.Text = "Status: Connected";
-                CustomMessageBox.Show("Courvix VPN", $"Successfully Connected To {_connectedServer}");
             });
         }
 
