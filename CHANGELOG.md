@@ -7,3 +7,5 @@ Documenting updates to the Courvix VPN client
 ### Changed
 - Added minimize control box
 - Added hover color to the server in the dropdown box.
+- Added hover color to control boxes
+- Added connecting indicator next to status
