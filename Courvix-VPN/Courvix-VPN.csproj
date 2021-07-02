@@ -49,8 +49,8 @@
     <Reference Include="Costura, Version=5.3.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Costura.Fody.5.3.0\lib\netstandard1.0\Costura.dll</HintPath>
     </Reference>
-    <Reference Include="DiscordRPC, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>D:\discord-rpc-csharp-master\discord-rpc-csharp-master\DiscordRPC\bin\Release\netstandard2.0\DiscordRPC.dll</HintPath>
+    <Reference Include="DiscordRPC, Version=1.0.175.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DiscordRichPresence.1.0.175\lib\net35\DiscordRPC.dll</HintPath>
     </Reference>
     <Reference Include="Guna.UI2, Version=2.0.1.4, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Guna.UI2.WinForms.2.0.1.4\lib\net40\Guna.UI2.dll</HintPath>
@@ -259,6 +259,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
     <Content Include="network_r.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

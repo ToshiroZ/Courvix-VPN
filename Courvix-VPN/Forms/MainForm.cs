@@ -58,6 +58,8 @@ namespace Courvix_VPN
 
                 await GetConfig(server);
                 statuslbl.Text = "Status: Connecting";
+                connectingIndicator.Visible = true;
+                connectingIndicator.Start();
                 _openvpn = new OpenVPN(Path.Combine(Strings.ConfigDirectory, server.ServerName),
                     logPath: Strings.OpenVPNLogs);
                 _openvpn.Closed += Manager_Closed;
@@ -203,6 +205,8 @@ namespace Courvix_VPN
                 ConnectBTN.Text = "Disconnect";
                 ConnectBTN.Enabled = true;
                 statuslbl.Text = "Status: Connected";
+                connectingIndicator.Visible = false;
+                connectingIndicator.Stop();
             });
         }
 

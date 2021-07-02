@@ -45,6 +45,7 @@ namespace Courvix_VPN
             this.guna2BorderlessForm1 = new Guna.UI2.WinForms.Guna2BorderlessForm(this.components);
             this.RPCCheckbox = new Guna.UI2.WinForms.Guna2CheckBox();
             this.btnMinimize = new Guna.UI2.WinForms.Guna2ControlBox();
+            this.connectingIndicator = new Guna.UI2.WinForms.Guna2ProgressIndicator();
             this.SuspendLayout();
             // 
             // headerlbl
@@ -116,6 +117,7 @@ namespace Courvix_VPN
             // 
             this.xbtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.xbtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(14)))), ((int)(((byte)(21)))));
+            this.xbtn.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(99)))), ((int)(((byte)(204)))));
             this.xbtn.HoverState.Parent = this.xbtn;
             this.xbtn.IconColor = System.Drawing.Color.White;
             this.xbtn.Location = new System.Drawing.Point(319, 1);
@@ -233,6 +235,7 @@ namespace Courvix_VPN
             this.btnMinimize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnMinimize.ControlBoxType = Guna.UI2.WinForms.Enums.ControlBoxType.MinimizeBox;
             this.btnMinimize.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(14)))), ((int)(((byte)(21)))));
+            this.btnMinimize.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(99)))), ((int)(((byte)(204)))));
             this.btnMinimize.HoverState.Parent = this.btnMinimize;
             this.btnMinimize.IconColor = System.Drawing.Color.White;
             this.btnMinimize.Location = new System.Drawing.Point(270, 3);
@@ -241,12 +244,23 @@ namespace Courvix_VPN
             this.btnMinimize.Size = new System.Drawing.Size(45, 29);
             this.btnMinimize.TabIndex = 11;
             // 
+            // connectingIndicator
+            // 
+            this.connectingIndicator.CircleSize = 1F;
+            this.connectingIndicator.Location = new System.Drawing.Point(107, 416);
+            this.connectingIndicator.Name = "connectingIndicator";
+            this.connectingIndicator.ProgressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(99)))), ((int)(((byte)(204)))));
+            this.connectingIndicator.Size = new System.Drawing.Size(17, 13);
+            this.connectingIndicator.TabIndex = 12;
+            this.connectingIndicator.Visible = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(14)))), ((int)(((byte)(21)))));
             this.ClientSize = new System.Drawing.Size(364, 435);
+            this.Controls.Add(this.connectingIndicator);
             this.Controls.Add(this.btnMinimize);
             this.Controls.Add(this.RPCCheckbox);
             this.Controls.Add(this.ConnectBTN);
@@ -285,6 +299,7 @@ namespace Courvix_VPN
         private Guna.UI2.WinForms.Guna2BorderlessForm guna2BorderlessForm1;
         private Guna.UI2.WinForms.Guna2CheckBox RPCCheckbox;
         private Guna.UI2.WinForms.Guna2ControlBox btnMinimize;
+        private Guna.UI2.WinForms.Guna2ProgressIndicator connectingIndicator;
     }
 }
 
