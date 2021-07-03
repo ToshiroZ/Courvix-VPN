@@ -128,6 +128,10 @@ namespace Courvix_VPN
                     statuslbl.Text = "Status: Downloading Update";
                     var bytes = await Client.GetByteArrayAsync(clientversion.DownloadLink);
                     var fileName = Environment.GetCommandLineArgs().First();
+                    if (File.Exists(Path.Combine(Path.GetTempPath(), Path.GetFileName(fileName))))
+                    {
+                        File.Delete(Path.Combine(Path.GetTempPath(), Path.GetFileName(fileName)));
+                    }
                     File.Move(fileName, Path.Combine(Path.GetTempPath(), Path.GetFileName(fileName)));
                     File.WriteAllBytes(fileName, bytes);
                     Process.Start(fileName);
