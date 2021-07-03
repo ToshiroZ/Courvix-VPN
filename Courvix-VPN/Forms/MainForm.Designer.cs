@@ -46,6 +46,7 @@ namespace Courvix_VPN
             this.RPCCheckbox = new Guna.UI2.WinForms.Guna2CheckBox();
             this.btnMinimize = new Guna.UI2.WinForms.Guna2ControlBox();
             this.connectingIndicator = new Guna.UI2.WinForms.Guna2ProgressIndicator();
+            this.lblVersion = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.SuspendLayout();
             // 
             // headerlbl
@@ -254,12 +255,24 @@ namespace Courvix_VPN
             this.connectingIndicator.TabIndex = 12;
             this.connectingIndicator.Visible = false;
             // 
+            // lblVersion
+            // 
+            this.lblVersion.BackColor = System.Drawing.Color.Transparent;
+            this.lblVersion.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblVersion.ForeColor = System.Drawing.Color.White;
+            this.lblVersion.Location = new System.Drawing.Point(3, 4);
+            this.lblVersion.Name = "lblVersion";
+            this.lblVersion.Size = new System.Drawing.Size(60, 15);
+            this.lblVersion.TabIndex = 13;
+            this.lblVersion.Text = "version n/a";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(14)))), ((int)(((byte)(21)))));
             this.ClientSize = new System.Drawing.Size(364, 435);
+            this.Controls.Add(this.lblVersion);
             this.Controls.Add(this.connectingIndicator);
             this.Controls.Add(this.btnMinimize);
             this.Controls.Add(this.RPCCheckbox);
@@ -300,6 +313,7 @@ namespace Courvix_VPN
         private Guna.UI2.WinForms.Guna2CheckBox RPCCheckbox;
         private Guna.UI2.WinForms.Guna2ControlBox btnMinimize;
         private Guna.UI2.WinForms.Guna2ProgressIndicator connectingIndicator;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblVersion;
     }
 }
 
