@@ -2,6 +2,13 @@
 
 Documenting updates to the Courvix VPN client
 
+## [1.0.3] - July 7 2021
+
+### Changed
+- Server list now displays enabled servers only via the ("enabled") JSON value
+
+### Fixed
+- Discord RPC is now forcefully disposed on exit to prevent ghosting
 
 ## [1.0.2] - July 3 2021
 
