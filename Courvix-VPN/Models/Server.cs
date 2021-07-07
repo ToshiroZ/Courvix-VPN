@@ -11,5 +11,6 @@ namespace Courvix_VPN.Models
     {
         [JsonProperty("servername")] public string ServerName { get; set; }
         [JsonProperty("url")] public string ConfigLink { get; set; }
+        [JsonProperty("enabled")] public bool Enabled { get; set; }
     }
 }

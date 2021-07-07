@@ -105,7 +105,7 @@ namespace Courvix_VPN
                 statuslbl.Text = "Status: Getting Servers";
                 var serverjson = await Client.GetStringAsync("https://courvix.com/vpn/server_list.json");
                 _servers = JsonConvert.DeserializeObject<List<Server>>(serverjson).OrderBy(x => x.ServerName).ToList();
-                serversCB.DataSource = _servers.Select(x => x.ServerName).ToArray();
+                serversCB.DataSource = _servers.Where(x => x.Enabled == true).Select(x => x.ServerName).ToArray();
             }
             catch
             {
