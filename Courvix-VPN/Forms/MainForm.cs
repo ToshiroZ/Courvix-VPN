@@ -116,7 +116,7 @@ namespace Courvix_VPN
             var settings = SettingsManager.Load();
             RPCCheckbox.Checked = settings.DiscordRPC;
             statuslbl.Text = "Status: Not Connected";
-            lblVersion.Text = "v1.0.2";
+            lblVersion.Text = "v1.0.3";
         }
 
         private async Task CheckVersion()
@@ -227,6 +227,13 @@ namespace Courvix_VPN
                 Process.Start("https://swupdate.openvpn.org/community/releases/OpenVPN-2.5.2-I601-amd64.msi");
                 Environment.Exit(1);
             }
+        }
+
+        private void xbtn_Click(object sender, EventArgs e)
+        {
+            // Make sure RPC is properly cleared on exit
+            Globals.RPCClient.Dispose();
+            Application.Exit();
         }
     }
 }

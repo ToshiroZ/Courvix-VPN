@@ -126,6 +126,7 @@ namespace Courvix_VPN
             this.xbtn.ShadowDecoration.Parent = this.xbtn;
             this.xbtn.Size = new System.Drawing.Size(45, 29);
             this.xbtn.TabIndex = 4;
+            this.xbtn.Click += new System.EventHandler(this.xbtn_Click);
             // 
             // leftborder
             // 
