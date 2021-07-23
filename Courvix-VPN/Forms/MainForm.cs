@@ -116,7 +116,7 @@ namespace Courvix_VPN
             var settings = SettingsManager.Load();
             RPCCheckbox.Checked = settings.DiscordRPC;
             statuslbl.Text = "Status: Not Connected";
-            lblVersion.Text = "v1.0.3";
+            lblVersion.Text = "v1.0.4";
         }
 
         private async Task CheckVersion()
