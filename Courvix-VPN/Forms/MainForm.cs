@@ -58,6 +58,8 @@ namespace Courvix_VPN
 
                 await GetConfig(server);
                 statuslbl.Text = "Status: Connecting";
+                connectingIndicator.Visible = true;
+                connectingIndicator.Start();
                 _openvpn = new OpenVPN(Path.Combine(Strings.ConfigDirectory, server.ServerName),
                     logPath: Strings.OpenVPNLogs);
                 _openvpn.Closed += Manager_Closed;
@@ -103,7 +105,7 @@ namespace Courvix_VPN
                 statuslbl.Text = "Status: Getting Servers";
                 var serverjson = await Client.GetStringAsync("https://courvix.com/vpn/server_list.json");
                 _servers = JsonConvert.DeserializeObject<List<Server>>(serverjson).OrderBy(x => x.ServerName).ToList();
-                serversCB.DataSource = _servers.Select(x => x.ServerName).ToArray();
+                serversCB.DataSource = _servers.Where(x => x.Enabled == true).Select(x => x.ServerName).ToArray();
             }
             catch
             {
@@ -114,6 +116,7 @@ namespace Courvix_VPN
             var settings = SettingsManager.Load();
             RPCCheckbox.Checked = settings.DiscordRPC;
             statuslbl.Text = "Status: Not Connected";
+            lblVersion.Text = "v1.0.4";
         }
 
         private async Task CheckVersion()
@@ -207,6 +210,8 @@ namespace Courvix_VPN
                 ConnectBTN.Text = "Disconnect";
                 ConnectBTN.Enabled = true;
                 statuslbl.Text = "Status: Connected";
+                connectingIndicator.Visible = false;
+                connectingIndicator.Stop();
             });
         }
 
@@ -222,6 +227,13 @@ namespace Courvix_VPN
                 Process.Start("https://swupdate.openvpn.org/community/releases/OpenVPN-2.5.2-I601-amd64.msi");
                 Environment.Exit(1);
             }
+        }
+
+        private void xbtn_Click(object sender, EventArgs e)
+        {
+            // Make sure RPC is properly cleared on exit
+            Globals.RPCClient.Dispose();
+            Application.Exit();
         }
     }
 }
